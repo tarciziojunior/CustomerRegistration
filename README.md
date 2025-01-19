@@ -18,7 +18,7 @@ Este projeto consiste em dois componentes: **CustomerRegistration** e **Customer
 
 1. Clone o repositório para sua máquina local:
    ```bash
-   git clone https://github.com/yourusername/CustomerRegistration.git
+   git clone https://github.com/tarciziojunior/CustomerRegistration.git
    ```
 2. Abra o arquivo de solução `CustomerRegistration.sln` no Visual Studio.
 3. Restaure os pacotes NuGet navegando até o menu "Ferramentas" no Visual Studio e selecionando "Gerenciador de Pacotes NuGet" > "Gerenciar Pacotes NuGet para a Solução".
