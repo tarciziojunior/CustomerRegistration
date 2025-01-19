@@ -5,7 +5,12 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerRegistration", "CustomerRegistration\CustomerRegistration.csproj", "{884FE145-C5B9-4533-B4B4-BD1D96D09108}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerRegistrationApi", "CustomerRegistrationApi\CustomerRegistrationApi.csproj", "{F37461FC-995B-4932-A41F-8B4947CE4A20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerRegistrationApi", "CustomerRegistrationApi\CustomerRegistrationApi.csproj", "{F37461FC-995B-4932-A41F-8B4947CE4A20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{E0D82CE2-CF23-4BFB-B169-B74B366723BC}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

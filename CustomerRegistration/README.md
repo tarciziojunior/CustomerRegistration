@@ -20,13 +20,13 @@ Antes de iniciar, certifique-se de que os seguintes requisitos estejam atendidos
 1. Clone este repositório:
 
    ```bash
-   git clone <URL_DO_REPOSITORIO>
+   git clone https://github.com/tarciziojunior/CustomerRegistration
    ```
 
 2. Navegue até o diretório do projeto:
 
    ```bash
-   cd <NOME_DO_PROJETO>
+   cd CustomerRegistration
    ```
 
 3. Restaure as dependências do projeto:
