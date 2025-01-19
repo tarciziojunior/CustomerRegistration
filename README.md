@@ -35,3 +35,28 @@ Este projeto consiste em dois componentes: **CustomerRegistration** e **Customer
 - Os dados não são persistidos e serão redefinidos toda vez que a aplicação for reiniciada.
 - Essa configuração garante uma experiência de desenvolvimento leve e sem complicações.
 
+# Configuração do Banco de Dados (Em Memória ou SQL Server)
+
+Este projeto está configurado para utilizar um banco de dados em memória durante o desenvolvimento e o SQL Server , utilizando o padrão **Adapter Pattern** para facilitar a migração entre os ambientes.
+
+## Passos para Configuração
+
+### Banco de Dados em Memória:
+Durante o desenvolvimento, é recomendável usar um banco de dados em memória para simplificar o processo e evitar dependências externas.
+
+### Banco de Dados SQL Server:
+Quando for necessário utilizar o SQL Server , altere a string de conexão e registre o repositório correspondente na injeção de dependência.
+
+## Configuração de Injeção de Dependência
+
+### Exemplo de Configuração para Banco de Dados em Memória:
+```bash
+// Registra o repositório com a injeção de dependência para memória
+builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
+```
+
+### Exemplo de Configuração para Banco de Dados em SqlServer:
+```bash
+// Registra o repositório com a injeção de dependência para SQL Server
+//builder.Services.AddScoped<ICustomerRepository, SqlServerCustomerRepository>();
+```
