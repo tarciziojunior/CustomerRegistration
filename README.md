@@ -35,13 +35,3 @@ Este projeto consiste em dois componentes: **CustomerRegistration** e **Customer
 - Os dados não são persistidos e serão redefinidos toda vez que a aplicação for reiniciada.
 - Essa configuração garante uma experiência de desenvolvimento leve e sem complicações.
 
-## Estrutura de Pastas
-- **`/source`**: Contém o código-fonte principal de ambas as aplicações.
-- **`/repos`**: Contém os arquivos de repositório para interações com o banco de dados.
-- **`/api`**: Contém os componentes relacionados à API.
-
-## Melhorias Futuras
-- Integração com APIs externas para funcionalidades adicionais.
-- Migração para um banco de dados pronto para produção (por exemplo, SQL Server).
-- Implementação de controle de acesso baseado em funções (RBAC).
-- Melhoria da interface para uma melhor experiência do usuário.
