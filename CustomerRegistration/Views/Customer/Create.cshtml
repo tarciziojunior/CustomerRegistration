@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input, button {
+            font-size: 1rem;
+        }
+
+        .address-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+            .address-item input {
+                flex: 1;
+                margin-right: 10px;
+            }
+
+            .address-item button {
+                background-color: red;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+
+                .address-item button:hover {
+                    opacity: 0.8;
+                }
+
+        button[type="submit"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function addAddress() {
+            const addressList = document.getElementById('addressList');
+            const newAddress = document.createElement('div');
+            newAddress.classList.add('address-item');
+            newAddress.innerHTML = `
+                        <input type="text" name="Addresses[]" placeholder="Exemplo: Rua das Flores, 123" maxlength="50" required />
+                        <button type="button" onclick="removeAddress(this)">Remover</button>
+                    `;
+            addressList.appendChild(newAddress);
+        }
+
+        function removeAddress(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</head>
+<body>
+    <h1>Cadastrar Cliente</h1>
+    <a href="@Url.Action("Index", "Customer")">Voltar para a lista</a>
+    <div id="error-message" style="color: red; margin-bottom: 10px;">
+        @ViewBag.ErrorMessage
+    </div>
+    <form method="post" enctype="multipart/form-data" action="@Url.Action("Create", "Customer")">
+        <div>
+            <label for="Name">Nome:</label><br />
+            <input type="text" id="Name" name="Name" placeholder="Nome do Cliente" maxlength="50" required />
+        </div>
+        <br />
+        <div>
+            <label for="Email">E-mail:</label><br />
+            <input type="email" id="Email" name="Email" placeholder="Email do Cliente" maxlength="50" required />
+        </div>
+        <br />
+        <div>
+            <label for="Logo">Logotipo:</label><br />
+            <input type="file" id="Logo" name="Logo" accept="image/*" required />
+        </div>
+        <br />
+        <div>
+            <label>Logradouros:</label>
+            <div id="addressList">
+                <div class="address-item">
+                    <input type="text" name="Addresses[]" placeholder="Exemplo: Rua das Flores, 123" maxlength="50" required />
+                    <button type="button" onclick="removeAddress(this)">Remover</button>
+                </div>
+            </div>
+            <button type="button" onclick="addAddress()">Adicionar Logradouro</button>
+        </div>
+        <br />
+        <button type="submit">Salvar Cliente</button>
+    </form>
+</body>
+</html>

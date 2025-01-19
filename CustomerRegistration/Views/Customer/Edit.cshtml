@@ -1,0 +1,122 @@
+﻿@model CustomerEditModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .address-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+            .address-item input {
+                flex: 1;
+                margin-right: 10px;
+            }
+
+            .address-item button {
+                background-color: red;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+
+                .address-item button:hover {
+                    opacity: 0.8;
+                }
+
+        button[type="submit"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function addAddress() {
+            const addressList = document.getElementById('addressList');
+            const newAddress = document.createElement('div');
+            newAddress.classList.add('address-item');
+            newAddress.innerHTML = `
+                        <input type="text" name="Addresses[]" placeholder="Logradouro" maxlength="50" required />
+                        <button type="button" onclick="removeAddress(this)">Remover</button>
+                    `;
+            addressList.appendChild(newAddress);
+        }
+
+        function removeAddress(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</head>
+<body>
+    <h1>Editar Cliente</h1>
+    <a href="@Url.Action("Index", "Customer")">Voltar para a lista</a>
+    <form method="post" enctype="multipart/form-data" action="/Customer/Edit">
+        <input type="hidden" id="Base64Image" name="Base64Image" value="@Model.Base64Image" required />
+        <input type="hidden" id="FileName" name="FileName" value="@Model.FileName" required />
+        <input type="hidden" id="ContentType" name="ContentType" value="@Model.ContentType" required />
+        <input type="hidden" id="Email" name="Email" value="@Model.Email" required />
+
+        <div>
+            <label for="Name">Nome:</label><br />
+            <input type="text" id="Name" name="Name" value="@Model.Name" placeholder="Nome do Cliente" maxlength="50" required />
+        </div>
+        <br />
+        <div>
+            <label for="Email">E-mail:</label><br />
+            <input disabled type="email" id="Email" name="Email" value="@Model.Email" placeholder="Email do Cliente" maxlength="50" required />
+        </div>
+        <br />
+        <div>
+            <label for="Logo">Logotipo:</label><br />
+            <input type="file" id="Logo" name="Logo" accept="image/*" />
+        </div>
+        <br />
+        <div>
+            <label>Imagem Atual:</label><br />
+            @if (!string.IsNullOrEmpty(@Model.Base64Image))
+            {
+                <img src="data:image/png;base64,@Model.Base64Image" alt="Logo" width="100" />
+            }
+            else
+            {
+                <span>Sem imagem disponível</span>
+            }
+        </div>
+        <br />
+        <div>
+            <label>Logradouros:</label>
+            <div id="addressList">
+                @for (int i = 0; i < Model.Addresses.Count; i++)
+                {
+                    <div class="address-item">
+                        <input type="text" name="Addresses[]" value="@Model.Addresses[i]" placeholder="Logradouro" maxlength="50" required />
+                        <button type="button" onclick="removeAddress(this)">Remover</button>
+                    </div>
+                }
+                @if (Model.Addresses.Count == 0)
+                {
+                    <div class="address-item">
+                        <input type="text" name="Addresses[]" placeholder="Logradouro" maxlength="50" required />
+                        <button type="button" onclick="removeAddress(this)">Remover</button>
+                    </div>
+                }
+            </div>
+            <button type="button" onclick="addAddress()">Adicionar Logradouro</button>
+        </div>
+        <br />
+        <button type="submit">Salvar Cliente</button>
+    </form>
+</body>
+</html>

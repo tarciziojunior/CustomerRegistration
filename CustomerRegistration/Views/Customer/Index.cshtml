@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Cadastro de Cliente";
+}
+
+@model List<CustomerIndexViewModel>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    img {
+        max-width: 100px;
+        height: auto;
+    }
+   
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+</head>
+<body>
+    <h1>Lista de Clientes</h1>
+    <a href="@Url.Action("Create", "Customer")">Adicionar Novo Cliente</a>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p style="color: red;">@ViewBag.ErrorMessage</p>
+    }
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Logradouros</th>
+                <th>Logo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.Name</td>
+                    <td>@customer.Email</td>
+                    <td>
+                        <ul>
+                            @foreach (var address in customer.Addresses)
+                            {
+                                <li>@address</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(customer.Base64Image))
+                        {
+                            <img src="data:image/png;base64,@customer.Base64Image" alt="Logo" width="100" />
+                        }
+                        else
+                        {
+                            <span>Sem imagem disponível</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Customer", new { email = customer.Email })">Editar</a>
+                        <a href="#"
+                           onclick="deleteCustomer('@Url.Action("Delete", "Customer", new { email = customer.Email })'); return false;">
+                            Excluir
+                        </a>
+                    </td>
+                </tr>
+            }
+            @* Evita a tabela vazia caso Model seja nulo ou esteja sem dados *@
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="5">Nenhum cliente cadastrado.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+<script>
+    async function deleteCustomer(url) {
+        if (confirm('Tem certeza de que deseja excluir este cliente?')) {
+            const response = await fetch(url, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                alert('Cliente excluído com sucesso!');
+                location.reload(); // Atualize a página ou redirecione
+            } else {
+                alert('Erro ao excluir o cliente.');
+            }
+        }
+    }
+</script>
